@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun-Mun Decors - Luxury & Premium Collection</title>
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --accent-color: #27ae60;
+            --whatsapp-color: #25D366;
+            --bg-color: #fafafa;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--primary-color); }
+
+        .top-bar {
+            background: linear-gradient(135deg, #000, #333);
+            color: #fff;
+            text-align: center;
+            font-size: 13px;
+            padding: 10px;
+            font-weight: 600;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 30px;
+            border-bottom: 1px solid #eaeaea;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .logo-text { font-size: 18px; font-weight: 800; letter-spacing: 1.5px; color: #111; }
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .support-nav-btn { font-size: 13px; background: #f4f4f4; padding: 8px 14px; border-radius: 20px; cursor: pointer; text-decoration: none; color: #333; font-weight: 600; }
+        .cart-icon { font-size: 22px; cursor: pointer; position: relative; }
+        .cart-count {
+            position: absolute; top: -8px; right: -10px;
+            background: var(--accent-color); color: white;
+            font-size: 10px; padding: 2px 6px; border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1200') no-repeat center center/cover;
+            color: white;
+            padding: 50px 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .hero-banner h1 { font-size: 28px; margin-bottom: 10px; font-weight: 700; }
+        .hero-banner p { font-size: 14px; opacity: 0.9; max-width: 600px; margin: auto; }
+
+        .section-title { font-size: 20px; margin-bottom: 20px; font-weight: 700; border-left: 4px solid var(--primary-color); padding-left: 10px; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        @media(min-width: 768px) {
+            .product-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .product-card {
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08); 
+        }
+        .product-img-wrapper { width: 100%; height: 210px; overflow: hidden; background: #fff; display: flex; align-items: center; justify-content: center; padding: 10px; }
+        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        .product-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; border-top: 1px solid #f4f4f4; }
+        .product-name { font-size: 14px; margin-bottom: 10px; color: #333; font-weight: 600; line-height: 1.4; }
+        .price-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .current-price { font-size: 16px; font-weight: 800; color: #111; }
+        .original-price { font-size: 12px; color: #999; text-decoration: line-through; }
+        .discount { font-size: 11px; color: var(--accent-color); font-weight: bold; background: #e8f8f0; padding: 2px 5px; border-radius: 4px;}
+
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        .detail-container { display: flex; flex-direction: column; gap: 30px; background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #eaeaea; }
+        @media(min-width: 768px) {
+            .detail-container { flex-direction: row; }
+            .detail-container > div { flex: 1; }
+        }
+        .detail-img { width: 100%; max-height: 450px; object-fit: contain; border-radius: 10px; background: #fff; padding: 10px; }
+        .badges-row { display: flex; gap: 10px; margin: 20px 0; font-size: 12px; color: #555; background: #fdfdfd; padding: 12px; border-radius: 8px; border: 1px solid #eee; justify-content: space-around; text-align: center;}
+        .buy-now-btn {
+            background: var(--primary-color); color: white; border: none; width: 100%;
+            padding: 16px; font-size: 16px; font-weight: bold; border-radius: 8px;
+            cursor: pointer; margin-top: 15px;
+        }
+
+        .checkout-steps {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #fff; padding: 15px 20px; margin-bottom: 20px; border-radius: 8px;
+            font-size: 14px; font-weight: bold; border: 1px solid #eaeaea;
+        }
+        .step-item { color: #ccc; }
+        .step-item.active { color: var(--accent-color); }
+
+        .checkout-step-content { background: #fff; padding: 25px; border-radius: 10px; border: 1px solid #eaeaea; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 13px; margin-bottom: 6px; color: #555; font-weight: 600; }
+        .form-control { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; background: #fcfcfc; }
+        .btn-submit {
+            background: var(--accent-color); color: white; border: none; width: 100%;
+            padding: 14px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer;
+        }
+        
+        .bill-box { background: #f9f9f9; border: 1px solid #eee; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .bill-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; color: #555; }
+        .bill-row.total { font-weight: bold; font-size: 18px; border-top: 2px dashed #ddd; padding-top: 12px; margin-top: 12px; color: #111; }
+        .back-link { display: inline-block; margin-bottom: 15px; color: #2980b9; text-decoration: none; font-size: 14px; cursor: pointer; font-weight: 600; }
+
+        .upi-container { text-align: center; background: #fff; border: 1px solid #e0e0e0; padding: 25px; border-radius: 10px; margin-bottom: 20px; }
+        .qr-box { width: 240px; height: 240px; margin: 0 auto 15px auto; background: #fff; border: 2px solid #eee; padding: 10px; border-radius: 12px; }
+        .qr-box img { width: 100%; height: 100%; object-fit: contain; }
+        .upi-id-text { font-size: 14px; font-weight: bold; background: #f1f8f5; color: #27ae60; padding: 10px; border-radius: 6px; border: 1px dashed #27ae60; margin-bottom: 15px; }
+        .upi-apps-grid { display: flex; gap: 10px; justify-content: center; }
+        .upi-app-btn { flex: 1; padding: 12px; background: #f8f8f8; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; font-weight: bold; text-decoration: none; color: #333; display: block; text-align: center; }
+
+        .support-card { background: #fff; border: 1px solid #eaeaea; padding: 30px; border-radius: 12px; text-align: center; max-width: 600px; margin: 20px auto; }
+        .whatsapp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: var(--whatsapp-color); color: white; padding: 14px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; margin-top: 20px; width: 100%; }
+
+        .floating-whatsapp {
+            position: fixed; bottom: 25px; right: 25px; background-color: var(--whatsapp-color); color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); z-index: 1000; text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">Save Min 50% on all orders and get free shipping</div>
+
+    <header>
+        <div class="logo-area" onclick="goHome()">
+            <div class="logo-text">☀️ Sun-Mun Decors</div>
+        </div>
+        <div class="header-right">
+            <a class="support-nav-btn" onclick="openSupport()">💬 Support</a>
+            <div class="cart-icon" onclick="openCart()">🛒 <span class="cart-count" id="cartCount">0</span></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="homeScreen" class="screen active">
+            <div class="hero-banner">
+                <h1>Transform Your Living Space</h1>
+                <p>Discover hand-crafted luxury showpieces & royal home styling artifacts at unbelievable prices.</p>
+            </div>
+            <div class="section-title">Exclusive Collection</div>
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+
+        <div id="detailScreen" class="screen">
+            <a class="back-link" onclick="goHome()">← Back to collection</a>
+            <div class="detail-container">
+                <div><img id="detailImg" class="detail-img" src="" alt="Product"></div>
+                <div>
+                    <h2 id="detailTitle" style="font-size: 24px; margin-bottom: 12px; color: #111;"></h2>
+                    <div class="price-row" style="margin-bottom: 15px;">
+                        <span id="detailPrice" class="current-price" style="font-size: 22px;"></span>
+                        <span id="detailOriginal" class="original-price" style="font-size: 16px;"></span>
+                        <span id="detailDiscount" class="discount" style="font-size: 14px;"></span>
+                    </div>
+                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Inclusive of all taxes. Free express shipping available across India.</p>
+                    <div class="badges-row">
+                        <div>🔒 100% Safe Payments</div>
+                        <div>📦 Next Day Dispatch</div>
+                        <div>⭐ Superior Quality</div>
+                    </div>
+                    <button class="buy-now-btn" onclick="proceedToCheckout()">Buy Now</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="supportScreen" class="screen">
+            <a class="back-link" onclick="goHome()">← Back to Home</a>
+            <div class="support-card">
+                <h2>Customer Support & Care</h2>
+                <p style="font-size: 14px; color: #666; margin-top: 10px;">Have questions regarding your order? Chat with us on WhatsApp.</p>
+                <div style="margin-top: 20px; font-size: 15px; font-weight: bold; background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                    WhatsApp Support Number: <br>
+                    <span style="color: var(--whatsapp-color); font-size: 20px; display:inline-block; margin-top: 5px;">+91 8955550232</span>
+                </div>
+                <a href="https://wa.me/918955550232?text=Hello%20Sun-Mun%20Decors" target="_blank" class="whatsapp-btn">💬 Chat on WhatsApp</a>
+            </div>
+        </div>
+
+        <div id="checkoutScreen" class="screen">
+            <a class="back-link" onclick="goHome()">← Cancel & Return</a>
+            <div class="checkout-steps">
+                <div class="step-item active" id="stepIndicator1">1. Shipping Address</div>
+                <div class="step-item" id="stepIndicator2">2. UPI Payment</div>
+            </div>
+
+            <div id="checkoutStep1" class="checkout-step-content">
+                <h3>Shipping Address</h3>
+                <div class="form-group" style="margin-top: 10px;">
+                    <label>Full Name</label>
+                    <input type="text" id="addrName" class="form-control" value="Dhara">
+                </div>
+                <div class="form-group">
+                    <label>Address Details</label>
+                    <input type="text" id="addrStreet" class="form-control" value="Jai ra., Shri nager ho jayegi, Tonk, Rajasthan">
+                </div>
+                <div class="form-group">
+                    <label>Pincode</label>
+                    <input type="text" id="addrPin" class="form-control" value="304502">
+                </div>
+                <button class="btn-submit" onclick="goToPayment()">Deliver to this Address & Pay</button>
+            </div>
+
+            <div id="checkoutStep2" class="checkout-step-content" style="display: none;">
+                <h3>Complete Payment via UPI Scanner</h3>
+                <div class="bill-box" style="margin-top: 15px;">
+                    <div class="bill-row"><span>Item Total</span><span id="billItemTotal">₹0</span></div>
+                    <div class="bill-row"><span>Online Payment Discount</span><span style="color: var(--accent-color); font-weight: bold;">-₹500</span></div>
+                    <div class="bill-row total"><span>Total Amount Payable</span><span id="billTotal">₹0</span></div>
+                </div>
+                <div class="upi-container">
+                    <div class="qr-box"><img id="dynamicQR" src="" alt="UPI QR Scanner"></div>
+                    <div class="upi-id-text">UPI ID: <span id="upiIdDisplay">foundationararwalglobal@okicici</span></div>
+                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Scan using Google Pay, PhonePe, Paytm or any UPI App</p>
+                    <div class="upi-apps-grid">
+                        <a href="#" id="gpayLink" class="upi-app-btn">Google Pay</a>
+                        <a href="#" id="phonepeLink" class="upi-app-btn">PhonePe</a>
+                        <a href="#" id="paytmLink" class="upi-app-btn">Paytm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/918955550232" target="_blank" class="floating-whatsapp">💬</a>
+
+    <script>
+        const products = [
+            { 
+                id: 1, 
+                name: "Premium 7 Galloping Horses Luxury Showpiece | Feng Shui Wealth & Success", 
+                price: 4990, 
+                original: 9980, 
+                discount: "50% OFF", 
+                img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600" 
+            },
+            { 
+                id: 2, 
+                name: "Blue Glass Turtle Luxury Showpiece", 
+                price: 2490, 
+                original: 4990, 
+                discount: "50% OFF", 
+                img: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=600" 
+            },
+            { 
+                id: 3, 
+                name: "Gold Resin Figurine For Spiritual Gift", 
+                price: 3890, 
+                original: 7780, 
+                discount: "50% OFF", 
+                img: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600" 
+            },
+            { 
+                id: 4, 
+                name: "Royal Peacock Decor Artifact", 
+                price: 5290, 
+                original: 10580, 
+                discount: "50% OFF", 
+                img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=600" 
+            },
+            { 
+                id: 5, 
+                name: "Fire-Breathing Dragon Table Lamp", 
+                price: 4590, 
+                original: 9180, 
+                discount: "50% OFF", 
+                img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600" 
+            }
+        ];
+
+        let selectedProduct = null;
+        let finalPayAmount = 0;
+        const upiID = "foundationararwalglobal@okicici";
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="product-card" onclick="selectProduct(${p.id})">
+                    <div class="product-img-wrapper">
+                        <img src="${p.img}" class="product-img" alt="${p.name}">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
+                        <div class="price-row">
+                            <span class="current-price">₹${p.price.toLocaleString()}</span>
+                            <span class="original-price">₹${p.original.toLocaleString()}</span>
+                            <span class="discount">${p.discount}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectProduct(id) {
+            selectedProduct = products.find(p => p.id === id);
+            document.getElementById('detailImg').src = selectedProduct.img;
+            document.getElementById('detailTitle').innerText = selectedProduct.name;
+            document.getElementById('detailPrice').innerText = `₹${selectedProduct.price.toLocaleString()}`;
+            document.getElementById('detailOriginal').innerText = `₹${selectedProduct.original.toLocaleString()}`;
+            document.getElementById('detailDiscount').innerText = selectedProduct.discount;
+            switchScreen('detailScreen');
+        }
+
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goHome() { switchScreen('homeScreen'); }
+        function openSupport() { switchScreen('supportScreen'); }
+        function openCart() { if(selectedProduct) switchScreen('detailScreen'); else alert("Cart is empty."); }
+        function proceedToCheckout() {
+            document.getElementById('cartCount').innerText = "1";
+            switchScreen('checkoutScreen');
+        }
+
+        function goToPayment() {
+            document.getElementById('stepIndicator1').classList.remove('active');
+            document.getElementById('stepIndicator2').classList.add('active');
+            document.getElementById('checkoutStep1').style.display = 'none';
+            document.getElementById('checkoutStep2').style.display = 'block';
+
+            const price = selectedProduct ? selectedProduct.price : 4990;
+            finalPayAmount = price - 500; 
+            
+            document.getElementById('billItemTotal').innerText = `₹${price.toLocaleString()}`;
+            document.getElementById('billTotal').innerText = `₹${finalPayAmount.toLocaleString()}`;
+
+            const upiDeepLink = `upi://pay?pa=${upiID}&pn=SunMunDecors&am=${finalPayAmount}&cu=INR`;
+            document.getElementById('dynamicQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiDeepLink)}`;
+            document.getElementById('gpayLink').href = upiDeepLink;
+            document.getElementById('phonepeLink').href = upiDeepLink;
+            document.getElementById('paytmLink').href = upiDeepLink;
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
